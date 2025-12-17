@@ -14,7 +14,7 @@ public:
     Persona(int , string , string );
     int getId();
     string getNombre();
-    virtual void mostrarPersona();
+    virtual void mostrarDatos();
 };
 
 #endif
