@@ -17,7 +17,6 @@ public:
     string getNombre();
     int getStock();
     float getPrecio();
-    void setStock(int);
     bool vender(int);
     void mostrarProducto();
 };
