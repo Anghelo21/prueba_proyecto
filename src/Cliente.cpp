@@ -3,15 +3,15 @@
 using namespace std;
 
 Cliente::Cliente(){
-	tipo = " ";
+	tipo = "N";
 }
 
 Cliente::Cliente(int i, string n, string d, string t):Persona(i, n, d){
-	tipo = t;
-}
-
-string Cliente::getTipoCliente(){
-	return tipo;
+	if(t=="F"||t=="f"){
+		tipo = "F";
+	}else{
+		tipo = "N";
+	}
 }
 
 float Cliente::obtenerDescuento(){
@@ -22,7 +22,7 @@ float Cliente::obtenerDescuento(){
 	}
 }
 
-void Cliente::mostrarCliente(){
-	Persona::mostrarPersona();
+void Cliente::mostrarDatos(){
+	Persona::mostrarDatos();
 	cout<<"Tipo de cliente: "<<tipo<<endl;
 }
