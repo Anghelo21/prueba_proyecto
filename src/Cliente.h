@@ -11,9 +11,8 @@ private:
 public:
     Cliente();
     Cliente(int , string , string , string);
-    string getTipoCliente();
     float obtenerDescuento();
-    void mostrarCliente();
+    void mostrarDatos();
 };
 
 #endif
