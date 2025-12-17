@@ -32,10 +32,6 @@ float Producto::getPrecio(){
 	return precio;
 }
 
-void Producto::setStock(int s){
-	stock = s;
-}
-
 bool Producto::vender(int c){
 	if(c<=stock){
 		stock -= c;
@@ -47,4 +43,8 @@ bool Producto::vender(int c){
 
 void Producto::mostrarProducto(){
 	cout<<" ID: "<<id<<" Nombre: "<<nombre<<" Stock: "<<stock<<" Precio: "<<precio<<endl;
+	if(stock>0&&stock<=5){
+		cout<<"ADVERTENCIA: STOCK CRITICO"<<endl;
+	}
+	cout<<"------------------"<<endl;
 }
