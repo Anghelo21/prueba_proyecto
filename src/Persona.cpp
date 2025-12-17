@@ -4,14 +4,15 @@ using namespace std;
 
 Persona::Persona(){
 	id = 0;
-	nombre = " ";
-	dni = " ";
+	nombre = "";
+	dni = "";
 }
 
 Persona::Persona(int i, string n, string d){
 	id = i;
 	nombre = n;
 	dni = d;
+	
 }
 
 int Persona::getId(){
@@ -22,7 +23,7 @@ string Persona::getNombre(){
 	return nombre;
 }
 
-void Persona::mostrarPersona(){
+void Persona::mostrarDatos(){
 	cout<<"ID: "<<id<<endl;
 	cout<<"Nombre: "<<nombre<<endl;
 	cout<<"DNI: "<<dni<<endl;
