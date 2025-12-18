@@ -14,7 +14,7 @@ void Venta::setVenta(int idV, Cliente* c){
 }
 
 void Venta::agregarProducto(Producto* p, int cant){
-	if(nProductos<10&&cant>0&&p!=NULL){
+	if(nProductos<50&&cant>0&&p!=NULL){
 		productos[nProductos] = p;
 		cantidades[nProductos] = cant;
 		nProductos++;
@@ -32,7 +32,7 @@ void Venta::guardarReporte(){
             while (i<nProductos) {
                 float sub = productos[i]->getPrecio() * cantidades[i];
                 archivo <<productos[i]->getNombre()
-                    	<<" x"<< cantidades[i]
+                    	<<" x "<< cantidades[i]
                         <<" = "<<sub<<endl;
                 total+=sub;
                 i++;
