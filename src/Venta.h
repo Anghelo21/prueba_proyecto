@@ -11,8 +11,8 @@ class Venta{
 	private:
 		int idVenta;
 		Cliente *cliente;
-		Producto *productos[10];
-		int cantidades[10];
+		Producto *productos[50];
+		int cantidades[50];
 		int nProductos;
 	public:
 		Venta();
