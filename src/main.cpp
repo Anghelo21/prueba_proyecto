@@ -4,9 +4,9 @@
 #include "Producto.h"
 #include "Venta.h"
 using namespace std;
-Cliente clientes[20];
-Producto productos[10];
-Venta ventas[10];
+Cliente clientes[50];
+Producto productos[50];
+Venta ventas[50];
 int nClientes = 0;
 int nProductos = 0;
 int nVentas = 0;
@@ -21,6 +21,15 @@ int buscarProductoPorID(int id){
     return -1;
 }
 
+int buscarClientePorID(int id) {
+    int i = 0;
+    while (i < nClientes) {
+        if (clientes[i].getId() == id)
+            return i;
+        i++;
+    }
+    return -1;
+}
 
 void ordenarProductos(){
     int i = 0;
@@ -39,38 +48,62 @@ void ordenarProductos(){
     cout<<"Productos ordenados por precio"<<endl;
 }
 
-void agregarCliente(){
-    if(nClientes < 20){
-        int id;
-        string nombre, dni, tipo;
-        cout<<"ID: "; cin>>id; cin.ignore();
-        cout<<"Nombre: "; getline(cin, nombre);
-        cout<<"DNI: "; getline(cin, dni);
-        cout<<"Tipo (normal/frecuente): "; getline(cin, tipo);
-        clientes[nClientes] = Cliente(id, nombre, dni, tipo);
-        if(clientes[nClientes].getId() != 0) {
-            nClientes++;
-            cout<<"Cliente agregado"<<endl;
+void agregarProducto(){
+    if(nProductos<50){
+        int id, stk;
+        float p;
+        string n;
+        cout<<"ID: ";
+        cin>>id;
+        cin.ignore();
+        if(buscarProductoPorID(id) != -1){
+            cout<<"ERROR: ID de producto ya registrado"<<endl;
         }else{
-            cout<<"Datos invalidos"<<endl;
+            cout<<"Nombre del producto: ";
+            getline(cin, n);
+            cout<<"Stock: ";
+            cin>>stk;
+            cout<<"Precio: ";
+            cin>>p;
+            productos[nProductos] = Producto(id, n, stk, p);
+            if(productos[nProductos].getId() != 0){
+                nProductos++;
+                cout<<"Producto registrado correctamente"<<endl;
+            }else{
+                cout<<"Datos inválidos"<<endl;
+            }
         }
+    }else{
+        cout<<"Límite de productos alcanzado"<<endl;
     }
 }
 
-void agregarProducto() {
-    if(nProductos < 10){
-        int id, stock;
-        float precio;
-        string nombre;
-        cout<<"ID: "; cin>>id; cin.ignore();
-        cout<<"Nombre: "; getline(cin, nombre);
-        cout<<"Stock: "; cin>>stock;
-        cout<<"Precio: "; cin>>precio;
-        productos[nProductos] = Producto(id, nombre, stock, precio);
-        if(productos[nProductos].getId() != 0){
-            nProductos++;
-            cout<<"Producto agregado"<<endl;
+void agregarCliente(){
+    if(nClientes < 50){
+        int id;
+        string n, dni, t;
+        cout<<"ID: ";
+        cin>>id;
+        cin.ignore();
+        if(buscarClientePorID(id) != -1){
+            cout<<"ERROR: ID de cliente ya registrado"<<endl;
+        }else{
+            cout<<"Nombre: ";
+            getline(cin, n);
+            cout<<"DNI: ";
+            getline(cin, dni);
+            cout<<"Tipo (normal/frecuente): ";
+            getline(cin, t);
+            clientes[nClientes] = Cliente(id, n, dni, t);
+            if(clientes[nClientes].getId() != 0){
+                nClientes++;
+                cout<<"Cliente registrado correctamente"<<endl;
+            }else{
+                cout<<"Datos inválidos"<<endl;
+            }
         }
+    }else{
+        cout<<"Límite de clientes alcanzado"<<endl;
     }
 }
 
@@ -104,32 +137,32 @@ void buscarProducto(){
 }
 
 void registrarVenta(){
-    if (nVentas < 10 && nClientes > 0 && nProductos > 0){
-        int idVenta, idCliente;
-        cout<<"ID Venta: "; cin>>idVenta;
-        cout<<"ID Cliente: "; cin>>idCliente;
-        int idxCliente = -1;
+    if (nVentas < 50 && nClientes > 0 && nProductos > 0){
+        int idV, idC;
+        cout<<"ID Venta: "; cin>>idV;
+        cout<<"ID Cliente: "; cin>>idC;
+        int idxC = -1;
         int i = 0;
         while(i < nClientes){
-            if(clientes[i].getId() == idCliente){
-            	idxCliente = i;
+            if(clientes[i].getId() == idC){
+            	idxC = i;
 			}
             i++;
         }
-        if(idxCliente != -1){
-            ventas[nVentas].setVenta(idVenta, &clientes[idxCliente]);
+        if(idxC != -1){
+            ventas[nVentas].setVenta(idV, &clientes[idxC]);
             int num;
             cout<<"Cantidad de productos: ";
             cin>>num;
             int j = 0;
             while(j < num){
-                int idProd, cant;
-                cout<<"ID Producto: "; cin>>idProd;
+                int idP, cant;
+                cout<<"ID Producto: "; cin>>idP;
                 cout<<"Cantidad: "; cin>>cant;
-                int idxProd = buscarProductoPorID(idProd);
-                if(idxProd != -1){
-                    if(productos[idxProd].vender(cant)){
-                    	ventas[nVentas].agregarProducto(&productos[idxProd], cant);
+                int idxP = buscarProductoPorID(idP);
+                if(idxP != -1){
+                    if(productos[idxP].vender(cant)){
+                    	ventas[nVentas].agregarProducto(&productos[idxP], cant);
 					}
                 }
                 j++;
